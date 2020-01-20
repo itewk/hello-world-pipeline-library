@@ -78,20 +78,37 @@
  *                             Default: -Dcom.redhat.xpaas.repo.jbossorg
  * @param sonarQubeEnv         Sonar Qube Environment to use when running Sonar Qube Tests
  */
-def call(
-    applicationName,
-    serviceName,
-    ownerGroupName,
-    imagePushRegistry,
-    imagePullRegistry,
-    ansibleVaultJenkinsCredentialName = ''
-    imagePushSecret   = 'image-push-repo-credential',
-    imagePullSecret   = 'image-pull-repo-credential',
-    builderImage      = 'jboss-eap-7/eap72-openjdk11-openshift-rhel8:1.0',
-    mavenMirrorUrl    = '',
-    mvnAdditionalArgs = '-Dcom.redhat.xpaas.repo.jbossorg',
-    sonarQubeEnv      = ''
-) {
+class PipelineJEE8Input implements Serializable {
+    String applicationName   = ''
+    String serviceName       = ''
+    String ownerGroupName    = ''
+    String imagePushRegistry = ''
+    String imagePullRegistry = ''
+    String ansibleVaultJenkinsCredentialName = ''
+    String imagePushSecret   = 'image-push-repo-credential',
+    String imagePullSecret   = 'image-pull-repo-credential',
+    String builderImage      = 'jboss-eap-7/eap72-openjdk11-openshift-rhel8:1.0',
+    String mavenMirrorUrl    = '',
+    String mvnAdditionalArgs = '-Dcom.redhat.xpaas.repo.jbossorg',
+    String sonarQubeEnv      = ''
+}
+def call(Map input) {
+    call(new PipelineJEE8Input(input))
+}
+def call(PipelineJEE8Input input) {
+    applicationName   = input.applicationName
+    serviceName       = input.serviceName
+    ownerGroupName    = input.ownerGroupName
+    imagePushRegistry = input.imagePushRegistry
+    imagePullRegistry = input.imagePullRegistry
+    ansibleVaultJenkinsCredentialName = input.ansibleVaultJenkinsCredentialName
+    imagePushSecret   = input.imagePushSecret
+    imagePullSecret   = input.imagePullSecret
+    builderImage      = input.builderImage
+    mavenMirrorUrl    = input.mavenMirrorUrl
+    mvnAdditionalArgs = input.mvnAdditionalArgs
+    sonarQubeEnv      = input.sonarQubeEnv
+
     // if on a feature/*, hotfix/*, or pipeline/* branch then
     // use dedicated namespaces so as not to interupt primary
     // develop,release/*, and master branch work flows.
