@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-/* The branching and promotion stratigy defined in this pipeline
+/* The branching and promotion strategy defined in this pipeline
  * is based on the GitFlow paradigm merged with OpenShift promotion concepts.
  * 
  * Branches to Stages to OpenShift Project Mapping
@@ -57,7 +57,7 @@
  * @param applicationName      The name of the application. This will be used as part of the dynamically created
  *                             OpenShift Project names as well as the image group when pushing and pulling
  *                             images form image repository.
- * @param serviceName          The servcie name within the applciation. Used for creating the OpenShift BuildConfig, Service, etc
+ * @param serviceName          The service name within the applciation. Used for creating the OpenShift BuildConfig, Service, etc
  *                             as well as the image name pushed to the image group within the image repository.
  * @param ownerGroupName       The OpenShift RBAC group that should own the OpenShift resources created by this pipeline.
  * @param imagePushRegistry    The container image repository to push images to.
@@ -327,7 +327,7 @@ spec:
       		    }
                     stage('BUILD: build') {
                         steps {
-                            // build the applciation
+                            // build the application
                             sh "mvn clean package -U -B ${mvnAdditionalArgs}"
 
                             // copy other binary artifacts expected by S2I build to target directory
@@ -569,7 +569,7 @@ spec:
                 stages {
                     stage('QA: Approval') {
                         steps {
-                            //TODO: send wiating for approval notification to ChatOps / Email / Other notification system
+                            //TODO: send waiting for approval notification to ChatOps / Email / Other notification system
                             input 'Promote to QA environment?'
                         }
                     }
@@ -735,10 +735,10 @@ spec:
                 }
                 post {
                     success {
-                       //TODO: send success notification to ChatOps / Email / Other notifciation system
+                       //TODO: send success notification to ChatOps / Email / Other notification system
                     }
                     failure {
-                       //TODO: send failure notification to ChatOps / Email / Other notifciation system
+                       //TODO: send failure notification to ChatOps / Email / Other notification system
                     }
                 }
             }
@@ -746,10 +746,10 @@ spec:
         post {
             post {
                 success {
-                    //TODO: send success notification to ChatOps / Email / Other notifciation system
+                    //TODO: send success notification to ChatOps / Email / Other notification system
                 }
                 failure {
-                    //TODO: send failure notification to ChatOps / Email / Other notifciation system
+                    //TODO: send failure notification to ChatOps / Email / Other notification system
                 }
             }
             failure {
