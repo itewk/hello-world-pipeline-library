@@ -85,11 +85,11 @@ class PipelineJEE8Input implements Serializable {
     String imagePushRegistry = ''
     String imagePullRegistry = ''
     String ansibleVaultJenkinsCredentialName = ''
-    String imagePushSecret   = 'image-push-repo-credential',
-    String imagePullSecret   = 'image-pull-repo-credential',
-    String builderImage      = 'jboss-eap-7/eap72-openjdk11-openshift-rhel8:1.0',
-    String mavenMirrorUrl    = '',
-    String mvnAdditionalArgs = '-Dcom.redhat.xpaas.repo.jbossorg',
+    String imagePushSecret   = 'image-push-repo-credential'
+    String imagePullSecret   = 'image-pull-repo-credential'
+    String builderImage      = 'jboss-eap-7/eap72-openjdk11-openshift-rhel8:1.0'
+    String mavenMirrorUrl    = ''
+    String mvnAdditionalArgs = '-Dcom.redhat.xpaas.repo.jbossorg'
     String sonarQubeEnv      = ''
 }
 def call(Map input) {
